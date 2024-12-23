@@ -49,6 +49,11 @@ export const Videos = () => {
     setCurrentVideoIndex(index);
   };
 
+  const handleCloseModal = () => {
+    console.log('Videos: Closing video modal');
+    setActiveVideo(null);
+  };
+
   return (
     <section id="videos" className="py-20 bg-gradient-to-b from-accent to-white">
       <div className="container mx-auto px-4">
@@ -60,10 +65,7 @@ export const Videos = () => {
         {activeVideo && (
           <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
             <button 
-              onClick={() => {
-                console.log('Videos: Closing video modal');
-                setActiveVideo(null);
-              }}
+              onClick={handleCloseModal}
               className="absolute top-4 right-4 text-white text-xl p-2"
             >
               ✕
