@@ -96,7 +96,7 @@ export const Videos = () => {
             </button>
             <button
               onClick={() => handleVideoChange('prev')}
-              className="absolute left-8 top-1/2 -translate-y-1/2 text-white p-2 hover:bg-white/10 rounded-full transition-colors"
+              className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 text-white p-2 hover:bg-white/10 rounded-full transition-colors"
             >
               <ArrowLeft className="w-8 h-8" />
             </button>
@@ -113,7 +113,7 @@ export const Videos = () => {
             </div>
             <button
               onClick={() => handleVideoChange('next')}
-              className="absolute right-8 top-1/2 -translate-y-1/2 text-white p-2 hover:bg-white/10 rounded-full transition-colors"
+              className="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 text-white p-2 hover:bg-white/10 rounded-full transition-colors"
             >
               <ArrowRight className="w-8 h-8" />
             </button>
@@ -158,8 +158,8 @@ export const Videos = () => {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious className="absolute -left-16 top-1/2 -translate-y-1/2" />
-              <CarouselNext className="absolute -right-16 top-1/2 -translate-y-1/2" />
+              <CarouselPrevious className="absolute -left-4 md:-left-16 top-1/2 -translate-y-1/2" />
+              <CarouselNext className="absolute -right-4 md:-right-16 top-1/2 -translate-y-1/2" />
             </div>
           </Carousel>
         </div>
