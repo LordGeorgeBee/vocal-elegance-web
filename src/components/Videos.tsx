@@ -30,12 +30,23 @@ export const Videos = () => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
   const handleVideoChange = (direction: 'prev' | 'next') => {
+    console.log('Videos: Changing video direction:', direction);
     const newIndex = direction === 'prev'
       ? (currentVideoIndex === 0 ? videos.length - 1 : currentVideoIndex - 1)
       : (currentVideoIndex === videos.length - 1 ? 0 : currentVideoIndex + 1);
     
+    console.log('Videos: New index:', newIndex);
     setCurrentVideoIndex(newIndex);
-    setActiveVideo(videos[newIndex].src);
+    const newVideoSrc = videos[newIndex].src;
+    console.log('Videos: Setting new video source:', newVideoSrc);
+    setActiveVideo(newVideoSrc);
+  };
+
+  const handleVideoClick = (videoSrc: string, index: number) => {
+    console.log('Videos: Video clicked:', videoSrc);
+    console.log('Videos: Setting index to:', index);
+    setActiveVideo(videoSrc);
+    setCurrentVideoIndex(index);
   };
 
   return (
@@ -49,7 +60,10 @@ export const Videos = () => {
         {activeVideo && (
           <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
             <button 
-              onClick={() => setActiveVideo(null)}
+              onClick={() => {
+                console.log('Videos: Closing video modal');
+                setActiveVideo(null);
+              }}
               className="absolute top-4 right-4 text-white text-xl p-2"
             >
               ✕
@@ -86,11 +100,7 @@ export const Videos = () => {
                   <div className="p-2">
                     <div 
                       className="relative aspect-video rounded-lg overflow-hidden group cursor-pointer shadow-lg hover:shadow-xl transition-all"
-                      onClick={() => {
-                        console.log('Videos: Opening video:', video.src);
-                        setActiveVideo(video.src);
-                        setCurrentVideoIndex(index);
-                      }}
+                      onClick={() => handleVideoClick(video.src, index)}
                     >
                       {video.thumbnail ? (
                         <img 
