@@ -13,6 +13,7 @@ export const Hero = () => {
 
   useEffect(() => {
     if (videoRef.current) {
+      console.log('Hero: Attempting to play video from:', videoRef.current.src);
       videoRef.current.play().catch(error => {
         console.error('Hero video error:', error);
       });
@@ -20,6 +21,7 @@ export const Hero = () => {
   }, []);
 
   const videoUrl = encodeURI("/Show real (liv) Compres.mp4");
+  console.log('Hero: Encoded video URL:', videoUrl);
 
   return (
     <div className="relative h-[80vh] min-h-[500px] md:h-screen md:min-h-[600px] flex items-center justify-center">
@@ -30,7 +32,10 @@ export const Hero = () => {
         loop 
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
-        onError={(e) => console.error('Hero video error:', e)}
+        onError={(e) => {
+          console.error('Hero video error:', e);
+          console.log('Hero video element current source:', videoRef.current?.src);
+        }}
       >
         <source src={videoUrl} type="video/mp4" />
         Your browser does not support the video tag.

@@ -32,7 +32,7 @@ export const Videos = () => {
 
   useEffect(() => {
     // Log video sources for debugging
-    console.log('Video sources:', videos.map(v => v.src));
+    console.log('Videos component: Available video sources:', videos.map(v => v.src));
     
     // Generate thumbnails for videos without a predefined thumbnail
     const generateThumbnails = async () => {
@@ -86,17 +86,19 @@ export const Videos = () => {
     
     setCurrentVideoIndex(newIndex);
     if (videoRef.current) {
-      console.log('Changing video to:', videos[newIndex].src);
+      console.log('Videos: Changing video to:', videos[newIndex].src);
       videoRef.current.src = videos[newIndex].src;
       videoRef.current.load();
       videoRef.current.play().catch(error => {
         console.error('Video autoplay failed:', error);
+        console.log('Current video element source:', videoRef.current?.src);
       });
     }
   };
 
   const handleVideoError = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
     console.error('Video loading error:', e);
+    console.log('Failed video source:', videoRef.current?.src);
     // Try to reload the video
     if (videoRef.current) {
       console.log('Attempting to reload video:', videos[currentVideoIndex].src);
