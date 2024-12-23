@@ -64,7 +64,13 @@ export const VideoPlayer = ({
 
       videoRef.current.addEventListener('canplay', handleCanPlay);
       videoRef.current.addEventListener('error', handleError);
-      videoRef.current.src = src;
+
+      // Set source using source element instead of src attribute
+      const source = document.createElement('source');
+      source.src = src;
+      source.type = 'video/mp4';
+      videoRef.current.innerHTML = ''; // Clear any existing sources
+      videoRef.current.appendChild(source);
       videoRef.current.load();
 
       return () => {

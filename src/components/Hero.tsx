@@ -41,11 +41,22 @@ export const Hero = () => {
           readyState: video.readyState,
           currentSrc: video.currentSrc
         });
+        toast({
+          variant: "destructive",
+          title: "Video Error",
+          description: "There was an error loading the video. Please try refreshing the page.",
+        });
       };
 
       videoRef.current.addEventListener('canplay', handleCanPlay);
       videoRef.current.addEventListener('error', handleError);
-      videoRef.current.src = videoPath;
+
+      // Set source using source element instead of src attribute
+      const source = document.createElement('source');
+      source.src = videoPath;
+      source.type = 'video/mp4';
+      videoRef.current.innerHTML = ''; // Clear any existing sources
+      videoRef.current.appendChild(source);
       videoRef.current.load();
 
       return () => {
