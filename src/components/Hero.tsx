@@ -1,6 +1,13 @@
 import { motion } from "framer-motion";
+import { Button } from "./ui/button";
+import { ChevronRight } from "lucide-react";
 
 export const Hero = () => {
+  const scrollToContact = () => {
+    const contactSection = document.querySelector('#contact');
+    contactSection?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="relative h-screen min-h-[600px] flex items-center justify-center">
       <video 
@@ -28,6 +35,19 @@ export const Hero = () => {
           className="text-xl md:text-2xl mb-8 font-light">
           Timeless Vocal Elegance for Your Special Moments
         </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <Button 
+            onClick={scrollToContact}
+            size="lg"
+            className="bg-primary hover:bg-primary/90 text-white font-semibold"
+          >
+            Get in Touch <ChevronRight className="ml-2" />
+          </Button>
+        </motion.div>
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import { TikTokIcon } from "./icons/TikTokIcon";
 
 export const ContactSection = () => {
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-secondary/20 to-white">
+    <section id="contact" className="py-20 px-4 bg-gradient-to-b from-secondary/20 to-white">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-4xl font-display mb-4">Book Your Event</h2>
         <p className="text-lg mb-12 max-w-2xl mx-auto">
