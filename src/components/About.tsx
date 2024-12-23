@@ -7,7 +7,7 @@ export const About = () => {
         <h2 className="text-3xl md:text-4xl font-display mb-6 md:mb-8">About Olivia</h2>
         <div className="space-y-4 md:space-y-6">
           <p className="text-base md:text-lg leading-relaxed">
-            Based in Birmingham, West Midlands, Olivia Flemming-Smith is a professional wedding singer renowned for her remarkable ability to adapt to various musical styles. With her extensive song knowledge and stunning voice, she brings a unique versatility to every performance.
+            Based in Birmingham, West Midlands, Olivia Flemming Smith is a professional wedding singer renowned for her remarkable ability to adapt to various musical styles. With her extensive song knowledge and stunning voice, she brings a unique versatility to every performance.
           </p>
           <div className="flex items-center justify-center gap-4 my-6 md:my-8">
             <Heart className="w-6 h-6 md:w-8 md:h-8 text-secondary" />

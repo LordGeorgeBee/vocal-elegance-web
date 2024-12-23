@@ -14,7 +14,7 @@ const Landing = () => {
           transition={{ duration: 0.8 }}
           className="text-4xl md:text-6xl font-display mb-8"
         >
-          Olivia Fleming Smith
+          Olivia Flemming Smith
         </motion.h1>
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
