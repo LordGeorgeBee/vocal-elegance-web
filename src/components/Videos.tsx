@@ -81,10 +81,10 @@ export const Videos = () => {
           </div>
         )}
 
-        <Carousel className="w-full max-w-6xl mx-auto">
+        <Carousel className="w-full max-w-4xl mx-auto">
           <CarouselContent>
             {videos.map((video, index) => (
-              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+              <CarouselItem key={index} className="basis-full">
                 <div className="p-2">
                   <div 
                     className="relative aspect-video rounded-lg overflow-hidden group cursor-pointer"
