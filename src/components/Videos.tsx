@@ -28,7 +28,10 @@ export const Videos = () => {
       src: "/Singing wedding opra.mp4",
       title: "Opera Selections"
     }
-  ];
+  ].map(video => ({
+    ...video,
+    src: video.src.startsWith('/') ? video.src : `/${video.src}`
+  }));
 
   useEffect(() => {
     // Generate thumbnails for videos without a predefined thumbnail
@@ -39,24 +42,34 @@ export const Videos = () => {
             return video.thumbnail;
           }
           
-          const videoEl = document.createElement('video');
-          videoEl.src = video.src;
-          videoEl.crossOrigin = 'anonymous';
-          
-          return new Promise<string>((resolve) => {
-            videoEl.addEventListener('loadeddata', () => {
-              videoEl.currentTime = 1; // Set to 1 second to avoid black frames
-            });
+          try {
+            const videoEl = document.createElement('video');
+            videoEl.src = video.src;
+            videoEl.crossOrigin = 'anonymous';
             
-            videoEl.addEventListener('seeked', () => {
-              const canvas = document.createElement('canvas');
-              canvas.width = videoEl.videoWidth;
-              canvas.height = videoEl.videoHeight;
-              const ctx = canvas.getContext('2d');
-              ctx?.drawImage(videoEl, 0, 0);
-              resolve(canvas.toDataURL('image/jpeg'));
+            return new Promise<string>((resolve) => {
+              videoEl.addEventListener('loadeddata', () => {
+                videoEl.currentTime = 1;
+              });
+              
+              videoEl.addEventListener('seeked', () => {
+                const canvas = document.createElement('canvas');
+                canvas.width = videoEl.videoWidth;
+                canvas.height = videoEl.videoHeight;
+                const ctx = canvas.getContext('2d');
+                ctx?.drawImage(videoEl, 0, 0);
+                resolve(canvas.toDataURL('image/jpeg'));
+              });
+
+              videoEl.addEventListener('error', () => {
+                console.error('Error loading video for thumbnail:', video.src);
+                resolve('/placeholder.svg'); // Fallback to placeholder
+              });
             });
-          });
+          } catch (error) {
+            console.error('Error generating thumbnail:', error);
+            return '/placeholder.svg';
+          }
         })
       );
       setThumbnails(thumbs);
@@ -74,7 +87,16 @@ export const Videos = () => {
     if (videoRef.current) {
       videoRef.current.src = videos[newIndex].src;
       videoRef.current.load();
-      videoRef.current.play().catch(error => console.log('Video autoplay failed:', error));
+      videoRef.current.play().catch(error => {
+        console.error('Video autoplay failed:', error);
+      });
+    }
+  };
+
+  const handleVideoError = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+    console.error('Video loading error:', e);
+    if (videoRef.current) {
+      videoRef.current.src = videos[currentVideoIndex].src; // Try reloading
     }
   };
 
@@ -107,7 +129,8 @@ export const Videos = () => {
                 autoPlay 
                 preload="auto"
                 className="w-full rounded-lg shadow-2xl"
-                key={activeVideo} // Add key to force re-render when source changes
+                key={activeVideo}
+                onError={handleVideoError}
               >
                 <source src={activeVideo} type="video/mp4" />
                 Your browser does not support the video tag.
