@@ -40,6 +40,14 @@ export default {
           DEFAULT: "#987554",
           foreground: "#FFFFFF",
         },
+        funeral: {
+          primary: "#403E43",
+          secondary: "#8A898C",
+          accent: "#555555",
+          background: "#1A1F2C",
+          foreground: "#FFFFFF",
+          muted: "#333333",
+        }
       },
       fontFamily: {
         display: ["Playfair Display", "serif"],
