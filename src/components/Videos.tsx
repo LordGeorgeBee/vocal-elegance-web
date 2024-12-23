@@ -17,7 +17,8 @@ export const Videos = () => {
   const videos = [
     {
       src: "/Show real (liv) Compres.mp4",
-      title: "Show Reel 1"
+      title: "Show Reel 1",
+      thumbnail: "/lovable-uploads/a5ef7a3e-4879-4b90-8769-65514a892886.png"
     },
     {
       src: "/Show real 2 compres.mp4",
@@ -30,10 +31,14 @@ export const Videos = () => {
   ];
 
   useEffect(() => {
-    // Generate thumbnails for each video
+    // Generate thumbnails for videos without a predefined thumbnail
     const generateThumbnails = async () => {
       const thumbs = await Promise.all(
         videos.map(async (video) => {
+          if (video.thumbnail) {
+            return video.thumbnail;
+          }
+          
           const videoEl = document.createElement('video');
           videoEl.src = video.src;
           videoEl.crossOrigin = 'anonymous';
