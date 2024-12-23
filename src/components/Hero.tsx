@@ -2,10 +2,16 @@ import { motion } from "framer-motion";
 
 export const Hero = () => {
   return (
-    <div className="relative h-screen min-h-[600px] flex items-center justify-center parallax"
-         style={{
-           backgroundImage: "url('https://images.unsplash.com/photo-1473177104440-ffee2f376098?auto=format&fit=crop&w=1920&q=80')",
-         }}>
+    <div className="relative h-screen min-h-[600px] flex items-center justify-center">
+      <video 
+        autoPlay 
+        muted 
+        loop 
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src="/Singing wedding opra.mp4" type="video/mp4" />
+      </video>
       <div className="absolute inset-0 bg-black/40" />
       <div className="relative z-10 text-center text-white px-4">
         <motion.h1 

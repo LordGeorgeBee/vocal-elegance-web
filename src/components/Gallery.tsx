@@ -1,7 +1,10 @@
 const images = [
-  "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+  "/ba54c8d5-8b27-4037-970d-655fb4c9e296_4_287746-162619334747380.webp",
+  "/c56f1545-5466-43ad-b316-0ed3584eda8b-2_4_287746-162619336299512.webp",
+  "/eadd193e-1202-40a1-bf25-ce99136b073e-2_4_287746-162619337021378.webp",
+  "/f0789854-1c10-4009-8716-6e6aa8710f32_4_287746-162619335873491.webp",
+  "/img-0671_4_287746-162702938288714.webp",
+  "/img-0756_4_287746-162702937092683.webp"
 ];
 
 export const Gallery = () => {
@@ -14,7 +17,7 @@ export const Gallery = () => {
             <div key={index} className="aspect-square overflow-hidden rounded-lg">
               <img 
                 src={image} 
-                alt={`Performance ${index + 1}`}
+                alt={`Olivia Fleming Smith Performance ${index + 1}`}
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
               />
             </div>
