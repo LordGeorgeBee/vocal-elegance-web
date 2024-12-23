@@ -28,12 +28,12 @@ export const Videos = () => {
       src: "/Singing wedding opra.mp4",
       title: "Opera Selections"
     }
-  ].map(video => ({
-    ...video,
-    src: video.src.startsWith('/') ? video.src : `/${video.src}`
-  }));
+  ];
 
   useEffect(() => {
+    // Log video sources for debugging
+    console.log('Video sources:', videos.map(v => v.src));
+    
     // Generate thumbnails for videos without a predefined thumbnail
     const generateThumbnails = async () => {
       const thumbs = await Promise.all(
@@ -43,6 +43,7 @@ export const Videos = () => {
           }
           
           try {
+            console.log('Attempting to generate thumbnail for:', video.src);
             const videoEl = document.createElement('video');
             videoEl.src = video.src;
             videoEl.crossOrigin = 'anonymous';
@@ -61,9 +62,9 @@ export const Videos = () => {
                 resolve(canvas.toDataURL('image/jpeg'));
               });
 
-              videoEl.addEventListener('error', () => {
-                console.error('Error loading video for thumbnail:', video.src);
-                resolve('/placeholder.svg'); // Fallback to placeholder
+              videoEl.addEventListener('error', (e) => {
+                console.error('Error loading video for thumbnail:', video.src, e);
+                resolve('/placeholder.svg');
               });
             });
           } catch (error) {
@@ -85,6 +86,7 @@ export const Videos = () => {
     
     setCurrentVideoIndex(newIndex);
     if (videoRef.current) {
+      console.log('Changing video to:', videos[newIndex].src);
       videoRef.current.src = videos[newIndex].src;
       videoRef.current.load();
       videoRef.current.play().catch(error => {
@@ -95,8 +97,10 @@ export const Videos = () => {
 
   const handleVideoError = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
     console.error('Video loading error:', e);
+    // Try to reload the video
     if (videoRef.current) {
-      videoRef.current.src = videos[currentVideoIndex].src; // Try reloading
+      console.log('Attempting to reload video:', videos[currentVideoIndex].src);
+      videoRef.current.load();
     }
   };
 
@@ -155,6 +159,7 @@ export const Videos = () => {
                       <div 
                         className="relative aspect-video rounded-lg overflow-hidden group cursor-pointer shadow-lg hover:shadow-xl transition-all"
                         onClick={() => {
+                          console.log('Opening video:', video.src);
                           setActiveVideo(video.src);
                           setCurrentVideoIndex(index);
                         }}

@@ -1,23 +1,37 @@
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { ChevronRight } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 export const Hero = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
   const scrollToContact = () => {
     const contactSection = document.querySelector('#contact');
     contactSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(error => {
+        console.error('Hero video autoplay failed:', error);
+      });
+    }
+  }, []);
+
   return (
     <div className="relative h-[80vh] min-h-[500px] md:h-screen md:min-h-[600px] flex items-center justify-center">
       <video 
+        ref={videoRef}
         autoPlay 
         muted 
         loop 
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
+        onError={(e) => console.error('Hero video error:', e)}
       >
         <source src="/Show real (liv) Compres.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
       </video>
       <div className="absolute inset-0 bg-black/40" />
       <div className="relative z-10 text-center text-white px-4 max-w-[90%] md:max-w-none">
