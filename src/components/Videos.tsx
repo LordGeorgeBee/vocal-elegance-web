@@ -66,15 +66,15 @@ export const Videos = () => {
   }, []);
 
   const handleVideoChange = (direction: 'prev' | 'next') => {
-    if (direction === 'prev') {
-      setCurrentVideoIndex((prev) => (prev === 0 ? videos.length - 1 : prev - 1));
-    } else {
-      setCurrentVideoIndex((prev) => (prev === videos.length - 1 ? 0 : prev + 1));
-    }
+    const newIndex = direction === 'prev'
+      ? (currentVideoIndex === 0 ? videos.length - 1 : currentVideoIndex - 1)
+      : (currentVideoIndex === videos.length - 1 ? 0 : currentVideoIndex + 1);
+    
+    setCurrentVideoIndex(newIndex);
     if (videoRef.current) {
-      videoRef.current.src = videos[currentVideoIndex].src;
+      videoRef.current.src = videos[newIndex].src;
       videoRef.current.load();
-      videoRef.current.play();
+      videoRef.current.play().catch(error => console.log('Video autoplay failed:', error));
     }
   };
 
@@ -107,8 +107,10 @@ export const Videos = () => {
                 autoPlay 
                 preload="auto"
                 className="w-full rounded-lg shadow-2xl"
+                key={activeVideo} // Add key to force re-render when source changes
               >
                 <source src={activeVideo} type="video/mp4" />
+                Your browser does not support the video tag.
               </video>
             </div>
             <button
