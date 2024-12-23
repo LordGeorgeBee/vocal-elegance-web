@@ -16,16 +16,16 @@ export const Videos = () => {
   
   const videos = [
     {
-      src: new URL('/Show real (liv) Compres.mp4', import.meta.url).href,
+      src: "/Show real (liv) Compres.mp4",
       title: "Performance Highlights",
       thumbnail: "/lovable-uploads/a5ef7a3e-4879-4b90-8769-65514a892886.png"
     },
     {
-      src: new URL('/Show real 2 compres.mp4', import.meta.url).href,
+      src: "/Show real 2 compres.mp4",
       title: "Wedding Performances"
     },
     {
-      src: new URL('/Singing wedding opra.mp4', import.meta.url).href,
+      src: "/Singing wedding opra.mp4",
       title: "Opera Selections"
     }
   ];
