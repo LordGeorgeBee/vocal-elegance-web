@@ -19,22 +19,26 @@ export default {
     },
     extend: {
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        border: "#372C2E",
+        input: "#372C2E",
+        ring: "#DE9E48",
+        background: "#FFFFFF",
+        foreground: "#372C2E",
         primary: {
-          DEFAULT: "#E5DEFF",
-          foreground: "#333333",
+          DEFAULT: "#563727",
+          foreground: "#FFFFFF",
         },
         secondary: {
-          DEFAULT: "#FFDEE2",
-          foreground: "#333333",
+          DEFAULT: "#DE9E48",
+          foreground: "#372C2E",
         },
         accent: {
-          DEFAULT: "#F1F0FB",
-          foreground: "#333333",
+          DEFAULT: "#7A431D",
+          foreground: "#FFFFFF",
+        },
+        muted: {
+          DEFAULT: "#372C2E",
+          foreground: "#FFFFFF",
         },
       },
       fontFamily: {
