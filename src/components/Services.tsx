@@ -4,17 +4,17 @@ const services = [
   {
     icon: Heart,
     title: "Weddings",
-    description: "Create unforgettable moments with classical and operatic performances that elevate your special day."
+    description: "From operatic arias to modern hits, I'll work closely with you to create the perfect personalized playlist for your special day. Whether you need ceremony music, reception entertainment, or both, I'll ensure every musical moment is magical."
   },
   {
     icon: Music,
     title: "Funerals",
-    description: "Honor your loved ones with dignified and moving musical tributes that celebrate their memory."
+    description: "Honor your loved ones with dignified and moving musical tributes. I offer a carefully curated selection of classical pieces and hymns, providing a respectful and touching farewell."
   },
   {
     icon: Star,
     title: "Special Events",
-    description: "Add sophistication to your corporate events, private parties, and celebrations with live classical performances."
+    description: "From musical theatre to rock, I can adapt any song to suit my unique voice and your event's atmosphere. Perfect for corporate functions, private parties, and special celebrations requiring sophisticated live entertainment."
   }
 ];
 
