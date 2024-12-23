@@ -117,45 +117,48 @@ export const Videos = () => {
           </div>
         )}
 
-        <Carousel className="w-full max-w-4xl mx-auto">
-          <CarouselContent>
-            {videos.map((video, index) => (
-              <CarouselItem key={index} className="basis-full">
-                <div className="p-2">
-                  <div 
-                    className="relative aspect-video rounded-lg overflow-hidden group cursor-pointer"
-                    onClick={() => {
-                      setActiveVideo(video.src);
-                      setCurrentVideoIndex(index);
-                    }}
-                  >
-                    {thumbnails[index] ? (
-                      <img 
-                        src={thumbnails[index]} 
-                        alt={video.title}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-gray-200 animate-pulse" />
-                    )}
-                    <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <svg 
-                        className="w-16 h-16 text-white" 
-                        fill="currentColor" 
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
+        <div className="relative max-w-4xl mx-auto">
+          <CarouselPrevious className="absolute -left-16 top-1/2 -translate-y-1/2" />
+          <CarouselNext className="absolute -right-16 top-1/2 -translate-y-1/2" />
+          
+          <Carousel className="w-full">
+            <CarouselContent>
+              {videos.map((video, index) => (
+                <CarouselItem key={index} className="basis-full">
+                  <div className="p-2">
+                    <div 
+                      className="relative aspect-video rounded-lg overflow-hidden group cursor-pointer"
+                      onClick={() => {
+                        setActiveVideo(video.src);
+                        setCurrentVideoIndex(index);
+                      }}
+                    >
+                      {thumbnails[index] ? (
+                        <img 
+                          src={thumbnails[index]} 
+                          alt={video.title}
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gray-200 animate-pulse" />
+                      )}
+                      <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <svg 
+                          className="w-16 h-16 text-white" 
+                          fill="currentColor" 
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </div>
                     </div>
+                    <h3 className="text-xl font-display text-center mt-4">{video.title}</h3>
                   </div>
-                  <h3 className="text-xl font-display text-center mt-4">{video.title}</h3>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="left-2" />
-          <CarouselNext className="right-2" />
-        </Carousel>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+        </div>
       </div>
     </section>
   );
