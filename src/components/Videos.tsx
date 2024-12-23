@@ -5,31 +5,60 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export const Videos = () => {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const [thumbnails, setThumbnails] = useState<string[]>([]);
   const videoRef = useRef<HTMLVideoElement>(null);
   
   const videos = [
     {
       src: "/Show real (liv) Compres.mp4",
-      title: "Show Reel 1",
-      thumbnail: "/img-0671_4_287746-162702938288714.webp"
+      title: "Show Reel 1"
     },
     {
       src: "/Show real 2 compres.mp4",
-      title: "Show Reel 2",
-      thumbnail: "/img-0756_4_287746-162702937092683.webp"
+      title: "Show Reel 2"
     },
     {
       src: "/Singing wedding opra.mp4",
-      title: "Wedding Opera Performance",
-      thumbnail: "/ba54c8d5-8b27-4037-970d-655fb4c9e296_4_287746-162619334747380.webp"
+      title: "Wedding Opera Performance"
     }
   ];
+
+  useEffect(() => {
+    // Generate thumbnails for each video
+    const generateThumbnails = async () => {
+      const thumbs = await Promise.all(
+        videos.map(async (video) => {
+          const videoEl = document.createElement('video');
+          videoEl.src = video.src;
+          videoEl.crossOrigin = 'anonymous';
+          
+          return new Promise<string>((resolve) => {
+            videoEl.addEventListener('loadeddata', () => {
+              videoEl.currentTime = 1; // Set to 1 second to avoid black frames
+            });
+            
+            videoEl.addEventListener('seeked', () => {
+              const canvas = document.createElement('canvas');
+              canvas.width = videoEl.videoWidth;
+              canvas.height = videoEl.videoHeight;
+              const ctx = canvas.getContext('2d');
+              ctx?.drawImage(videoEl, 0, 0);
+              resolve(canvas.toDataURL('image/jpeg'));
+            });
+          });
+        })
+      );
+      setThumbnails(thumbs);
+    };
+
+    generateThumbnails();
+  }, []);
 
   const handleVideoChange = (direction: 'prev' | 'next') => {
     if (direction === 'prev') {
@@ -93,11 +122,15 @@ export const Videos = () => {
                       setCurrentVideoIndex(index);
                     }}
                   >
-                    <img 
-                      src={video.thumbnail} 
-                      alt={video.title}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
+                    {thumbnails[index] ? (
+                      <img 
+                        src={thumbnails[index]} 
+                        alt={video.title}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gray-200 animate-pulse" />
+                    )}
                     <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <svg 
                         className="w-16 h-16 text-white" 
