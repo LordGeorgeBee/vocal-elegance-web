@@ -1,4 +1,4 @@
-import { Instagram, Mail, Phone, Facebook, Music, BrandTiktok } from "lucide-react";
+import { Instagram, Mail, Phone, Facebook, Music, TiktokIcon } from "lucide-react";
 
 export const Footer = () => {
   return (
@@ -32,7 +32,7 @@ export const Footer = () => {
                  className="flex items-center gap-2 hover:text-gray-600"
                  target="_blank"
                  rel="noopener noreferrer">
-                <BrandTiktok className="w-4 h-4" />
+                <TiktokIcon className="w-4 h-4" />
                 <span>TikTok</span>
               </a>
               <a href="https://facebook.com" 

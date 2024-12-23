@@ -1,4 +1,4 @@
-import { Mail, Phone, Instagram, Facebook, Music, BrandTiktok } from "lucide-react";
+import { Mail, Phone, Instagram, Facebook, Music, TiktokIcon } from "lucide-react";
 
 export const ContactSection = () => {
   return (
@@ -36,7 +36,7 @@ export const ContactSection = () => {
                className="flex items-center gap-2 px-6 py-3 bg-accent rounded-lg hover:bg-accent/80 transition-colors"
                target="_blank"
                rel="noopener noreferrer">
-              <BrandTiktok className="w-5 h-5" />
+              <TiktokIcon className="w-5 h-5" />
               <span>TikTok</span>
             </a>
             <a href="https://facebook.com" 
