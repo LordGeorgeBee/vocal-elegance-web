@@ -47,7 +47,7 @@ export const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="font-display text-4xl md:text-5xl lg:text-7xl mb-4 md:mb-6">
-          Olivia Fleming Smith
+          Olivia Flemming Smith
         </motion.h1>
         <motion.p 
           initial={{ opacity: 0, y: 20 }}

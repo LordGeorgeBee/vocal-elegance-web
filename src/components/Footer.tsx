@@ -62,7 +62,7 @@ export const Footer = () => {
           </div>
         </div>
         <div className="text-center pt-6 md:pt-8 border-t border-gray-200">
-          <p className="text-sm md:text-base">&copy; {new Date().getFullYear()} Olivia Fleming Smith. All rights reserved.</p>
+          <p className="text-sm md:text-base">&copy; {new Date().getFullYear()} Olivia Flemming Smith. All rights reserved.</p>
         </div>
       </div>
     </footer>
