@@ -16,16 +16,16 @@ export const Videos = () => {
   
   const videos = [
     {
-      src: "/Show real (liv) Compres.mp4",
+      src: "/assets/Show real (liv) Compres.mp4",
       title: "Performance Highlights",
       thumbnail: "/lovable-uploads/a5ef7a3e-4879-4b90-8769-65514a892886.png"
     },
     {
-      src: "/Show real 2 compres.mp4",
+      src: "/assets/Show real 2 compres.mp4",
       title: "Wedding Performances"
     },
     {
-      src: "/Singing wedding opra.mp4",
+      src: "/assets/Singing wedding opra.mp4",
       title: "Opera Selections"
     }
   ];
