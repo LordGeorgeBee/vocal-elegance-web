@@ -10,11 +10,11 @@ export const themes = {
     muted: '#987554',
   },
   funeral: {
-    primary: '#403E43',
-    secondary: '#8A898C',
-    accent: '#555555',
-    background: '#1A1F2C',
+    primary: '#221F26',
+    secondary: '#333333',
+    accent: '#2A2A2A',
+    background: '#0F1219',
     foreground: '#FFFFFF',
-    muted: '#333333',
+    muted: '#1A1A1A',
   },
 };
