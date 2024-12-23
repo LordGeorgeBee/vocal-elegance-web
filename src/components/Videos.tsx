@@ -88,22 +88,24 @@ export const Videos = () => {
             </button>
             <button
               onClick={() => handleVideoChange('prev')}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-white p-2 hover:bg-white/10 rounded-full transition-colors"
+              className="absolute left-8 top-1/2 -translate-y-1/2 text-white p-2 hover:bg-white/10 rounded-full transition-colors"
             >
               <ArrowLeft className="w-8 h-8" />
             </button>
-            <video 
-              ref={videoRef}
-              controls 
-              autoPlay 
-              preload="auto"
-              className="max-w-4xl w-full"
-            >
-              <source src={activeVideo} type="video/mp4" />
-            </video>
+            <div className="max-w-4xl w-full">
+              <video 
+                ref={videoRef}
+                controls 
+                autoPlay 
+                preload="auto"
+                className="w-full"
+              >
+                <source src={activeVideo} type="video/mp4" />
+              </video>
+            </div>
             <button
               onClick={() => handleVideoChange('next')}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-white p-2 hover:bg-white/10 rounded-full transition-colors"
+              className="absolute right-8 top-1/2 -translate-y-1/2 text-white p-2 hover:bg-white/10 rounded-full transition-colors"
             >
               <ArrowRight className="w-8 h-8" />
             </button>
