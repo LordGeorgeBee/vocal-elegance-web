@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { ChevronRight } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useToast } from "./ui/use-toast";
 
 export const Hero = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const { toast } = useToast();
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
   const scrollToContact = () => {
     const contactSection = document.querySelector('#contact');
@@ -18,20 +19,34 @@ export const Hero = () => {
       const videoPath = "/videos/Show real (liv) Compres.mp4";
       console.log('Hero: Setting video source to:', videoPath);
       videoRef.current.src = videoPath;
-      videoRef.current.load();
-      videoRef.current.play().catch(error => {
-        console.error('Hero: Video play error:', error);
-        toast({
-          variant: "destructive",
-          title: "Video Error",
-          description: "There was an error playing the video. Please try refreshing the page.",
+      
+      const handleCanPlay = () => {
+        console.log('Hero: Video can play');
+        setIsVideoLoaded(true);
+        videoRef.current?.play().catch(error => {
+          console.error('Hero: Video play error:', error);
+          toast({
+            variant: "destructive",
+            title: "Video Error",
+            description: "There was an error playing the video. Please try refreshing the page.",
+          });
         });
-      });
+      };
+
+      videoRef.current.addEventListener('canplay', handleCanPlay);
+      videoRef.current.load();
+
+      return () => {
+        videoRef.current?.removeEventListener('canplay', handleCanPlay);
+      };
     }
   }, [toast]);
 
   return (
     <div className="relative h-[80vh] min-h-[500px] md:h-screen md:min-h-[600px] flex items-center justify-center">
+      {!isVideoLoaded && (
+        <div className="absolute inset-0 bg-gray-900" />
+      )}
       <video 
         ref={videoRef}
         autoPlay 
