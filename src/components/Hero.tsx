@@ -30,7 +30,7 @@ export const Hero = () => {
         className="absolute inset-0 w-full h-full object-cover"
         onError={(e) => console.error('Hero video error:', e)}
       >
-        <source src={encodeURI("/assets/Show real (liv) Compres.mp4")} type="video/mp4" />
+        <source src="/Show real (liv) Compres.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       <div className="absolute inset-0 bg-black/40" />
