@@ -8,6 +8,7 @@ import {
 import { useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { VideoPlayer } from "./VideoPlayer";
+import { useToast } from "./ui/use-toast";
 
 const videos = [
   {
@@ -28,6 +29,7 @@ const videos = [
 export const Videos = () => {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const { toast } = useToast();
 
   const handleVideoChange = (direction: 'prev' | 'next') => {
     console.log('Videos: Changing video direction:', direction);
@@ -52,6 +54,15 @@ export const Videos = () => {
   const handleCloseModal = () => {
     console.log('Videos: Closing video modal');
     setActiveVideo(null);
+  };
+
+  const handleVideoError = (error: any) => {
+    console.error('Videos: Video error:', error);
+    toast({
+      variant: "destructive",
+      title: "Video Error",
+      description: "There was an error with the video. Please try refreshing the page.",
+    });
   };
 
   return (
@@ -82,7 +93,7 @@ export const Videos = () => {
                 controls
                 autoPlay
                 className="w-full rounded-lg shadow-2xl"
-                onError={(error) => console.error('Videos: Modal video error:', error)}
+                onError={handleVideoError}
               />
             </div>
             <button

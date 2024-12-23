@@ -1,4 +1,5 @@
 import { useRef, useEffect } from 'react';
+import { useToast } from "./ui/use-toast";
 
 interface VideoPlayerProps {
   src: string;
@@ -20,6 +21,7 @@ export const VideoPlayer = ({
   loop = false
 }: VideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const { toast } = useToast();
 
   useEffect(() => {
     if (videoRef.current) {
@@ -28,11 +30,16 @@ export const VideoPlayer = ({
       if (autoPlay) {
         videoRef.current.play().catch(error => {
           console.error('VideoPlayer: Autoplay error:', error);
+          toast({
+            variant: "destructive",
+            title: "Video Error",
+            description: "There was an error playing the video. Please try refreshing the page.",
+          });
           onError?.(error);
         });
       }
     }
-  }, [src, autoPlay, onError]);
+  }, [src, autoPlay, onError, toast]);
 
   return (
     <video
@@ -45,6 +52,11 @@ export const VideoPlayer = ({
       playsInline
       onError={(e) => {
         console.error('VideoPlayer: Error event:', e);
+        toast({
+          variant: "destructive",
+          title: "Video Error",
+          description: "There was an error loading the video. Please try refreshing the page.",
+        });
         onError?.(e);
       }}
     >

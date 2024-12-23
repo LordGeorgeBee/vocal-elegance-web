@@ -2,9 +2,11 @@ import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { ChevronRight } from "lucide-react";
 import { useEffect, useRef } from "react";
+import { useToast } from "./ui/use-toast";
 
 export const Hero = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const { toast } = useToast();
 
   const scrollToContact = () => {
     const contactSection = document.querySelector('#contact');
@@ -19,9 +21,14 @@ export const Hero = () => {
       videoRef.current.load();
       videoRef.current.play().catch(error => {
         console.error('Hero: Video play error:', error);
+        toast({
+          variant: "destructive",
+          title: "Video Error",
+          description: "There was an error playing the video. Please try refreshing the page.",
+        });
       });
     }
-  }, []);
+  }, [toast]);
 
   return (
     <div className="relative h-[80vh] min-h-[500px] md:h-screen md:min-h-[600px] flex items-center justify-center">
@@ -32,7 +39,14 @@ export const Hero = () => {
         loop 
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
-        onError={(e) => console.error('Hero: Video error event:', e)}
+        onError={(e) => {
+          console.error('Hero: Video error event:', e);
+          toast({
+            variant: "destructive",
+            title: "Video Error",
+            description: "There was an error loading the video. Please try refreshing the page.",
+          });
+        }}
       >
         Your browser does not support the video tag.
       </video>
