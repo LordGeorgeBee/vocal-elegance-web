@@ -5,10 +5,13 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export const Videos = () => {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const videoRef = useRef<HTMLVideoElement>(null);
   
   const videos = [
     {
@@ -28,6 +31,19 @@ export const Videos = () => {
     }
   ];
 
+  const handleVideoChange = (direction: 'prev' | 'next') => {
+    if (direction === 'prev') {
+      setCurrentVideoIndex((prev) => (prev === 0 ? videos.length - 1 : prev - 1));
+    } else {
+      setCurrentVideoIndex((prev) => (prev === videos.length - 1 ? 0 : prev + 1));
+    }
+    if (videoRef.current) {
+      videoRef.current.src = videos[currentVideoIndex].src;
+      videoRef.current.load();
+      videoRef.current.play();
+    }
+  };
+
   return (
     <section id="videos" className="py-20 bg-accent">
       <div className="container mx-auto px-4">
@@ -41,9 +57,27 @@ export const Videos = () => {
             >
               ✕
             </button>
-            <video controls autoPlay className="max-w-4xl w-full">
+            <button
+              onClick={() => handleVideoChange('prev')}
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-white p-2 hover:bg-white/10 rounded-full transition-colors"
+            >
+              <ArrowLeft className="w-8 h-8" />
+            </button>
+            <video 
+              ref={videoRef}
+              controls 
+              autoPlay 
+              preload="auto"
+              className="max-w-4xl w-full"
+            >
               <source src={activeVideo} type="video/mp4" />
             </video>
+            <button
+              onClick={() => handleVideoChange('next')}
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-white p-2 hover:bg-white/10 rounded-full transition-colors"
+            >
+              <ArrowRight className="w-8 h-8" />
+            </button>
           </div>
         )}
 
@@ -54,7 +88,10 @@ export const Videos = () => {
                 <div className="p-2">
                   <div 
                     className="relative aspect-video rounded-lg overflow-hidden group cursor-pointer"
-                    onClick={() => setActiveVideo(video.src)}
+                    onClick={() => {
+                      setActiveVideo(video.src);
+                      setCurrentVideoIndex(index);
+                    }}
                   >
                     <img 
                       src={video.thumbnail} 
