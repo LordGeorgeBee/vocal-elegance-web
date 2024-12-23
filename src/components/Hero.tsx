@@ -18,7 +18,6 @@ export const Hero = () => {
     if (videoRef.current) {
       const videoPath = "/videos/Show real (liv) Compres.mp4";
       console.log('Hero: Setting video source to:', videoPath);
-      videoRef.current.src = videoPath;
       
       const handleCanPlay = () => {
         console.log('Hero: Video can play');
@@ -33,11 +32,27 @@ export const Hero = () => {
         });
       };
 
+      const handleError = (e: Event) => {
+        console.error('Hero: Video error:', e);
+        const video = e.target as HTMLVideoElement;
+        console.error('Hero: Video error details:', {
+          error: video.error,
+          networkState: video.networkState,
+          readyState: video.readyState,
+          currentSrc: video.currentSrc
+        });
+      };
+
       videoRef.current.addEventListener('canplay', handleCanPlay);
+      videoRef.current.addEventListener('error', handleError);
+      videoRef.current.src = videoPath;
       videoRef.current.load();
 
       return () => {
-        videoRef.current?.removeEventListener('canplay', handleCanPlay);
+        if (videoRef.current) {
+          videoRef.current.removeEventListener('canplay', handleCanPlay);
+          videoRef.current.removeEventListener('error', handleError);
+        }
       };
     }
   }, [toast]);
@@ -54,14 +69,6 @@ export const Hero = () => {
         loop 
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
-        onError={(e) => {
-          console.error('Hero: Video error event:', e);
-          toast({
-            variant: "destructive",
-            title: "Video Error",
-            description: "There was an error loading the video. Please try refreshing the page.",
-          });
-        }}
       >
         Your browser does not support the video tag.
       </video>

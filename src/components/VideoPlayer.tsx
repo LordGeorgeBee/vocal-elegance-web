@@ -44,11 +44,34 @@ export const VideoPlayer = ({
         }
       };
 
+      const handleError = (e: Event) => {
+        console.error('VideoPlayer: Video error:', e);
+        const video = e.target as HTMLVideoElement;
+        console.error('VideoPlayer: Video error details:', {
+          error: video.error,
+          networkState: video.networkState,
+          readyState: video.readyState,
+          currentSrc: video.currentSrc
+        });
+        
+        toast({
+          variant: "destructive",
+          title: "Video Error",
+          description: "There was an error loading the video. Please try refreshing the page.",
+        });
+        onError?.(e);
+      };
+
       videoRef.current.addEventListener('canplay', handleCanPlay);
+      videoRef.current.addEventListener('error', handleError);
+      videoRef.current.src = src;
       videoRef.current.load();
 
       return () => {
-        videoRef.current?.removeEventListener('canplay', handleCanPlay);
+        if (videoRef.current) {
+          videoRef.current.removeEventListener('canplay', handleCanPlay);
+          videoRef.current.removeEventListener('error', handleError);
+        }
       };
     }
   }, [src, autoPlay, onError, toast]);
@@ -68,17 +91,7 @@ export const VideoPlayer = ({
         muted={muted}
         loop={loop}
         playsInline
-        onError={(e) => {
-          console.error('VideoPlayer: Error event:', e);
-          toast({
-            variant: "destructive",
-            title: "Video Error",
-            description: "There was an error loading the video. Please try refreshing the page.",
-          });
-          onError?.(e);
-        }}
       >
-        <source src={src} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
     </>
