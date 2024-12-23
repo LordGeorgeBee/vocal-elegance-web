@@ -41,12 +41,12 @@ export default {
           foreground: "#FFFFFF",
         },
         funeral: {
-          primary: "#221F26",
-          secondary: "#333333",
-          accent: "#2A2A2A",
-          background: "#0F1219",
+          primary: "#000000",
+          secondary: "#111111",
+          accent: "#1a1a1a",
+          background: "#000000",
           foreground: "#FFFFFF",
-          muted: "#1A1A1A",
+          muted: "#0a0a0a",
         }
       },
       fontFamily: {
