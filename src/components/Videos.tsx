@@ -17,16 +17,16 @@ export const Videos = () => {
   const videos = [
     {
       src: "/Show real (liv) Compres.mp4",
-      title: "Show Reel 1",
+      title: "Performance Highlights",
       thumbnail: "/lovable-uploads/a5ef7a3e-4879-4b90-8769-65514a892886.png"
     },
     {
       src: "/Show real 2 compres.mp4",
-      title: "Show Reel 2"
+      title: "Wedding Performances"
     },
     {
       src: "/Singing wedding opra.mp4",
-      title: "Wedding Opera Performance"
+      title: "Opera Selections"
     }
   ];
 
@@ -79,9 +79,12 @@ export const Videos = () => {
   };
 
   return (
-    <section id="videos" className="py-20 bg-accent">
+    <section id="videos" className="py-20 bg-gradient-to-b from-accent to-white">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-display text-center mb-12">Performance Videos</h2>
+        <h2 className="text-4xl font-display text-center mb-6">Experience the Magic</h2>
+        <p className="text-lg text-center mb-12 max-w-2xl mx-auto">
+          Watch Olivia perform and imagine how she could make your special day even more memorable.
+        </p>
         
         {activeVideo && (
           <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
@@ -103,7 +106,7 @@ export const Videos = () => {
                 controls 
                 autoPlay 
                 preload="auto"
-                className="w-full"
+                className="w-full rounded-lg shadow-2xl"
               >
                 <source src={activeVideo} type="video/mp4" />
               </video>
@@ -125,7 +128,7 @@ export const Videos = () => {
                   <CarouselItem key={index} className="basis-full">
                     <div className="p-2">
                       <div 
-                        className="relative aspect-video rounded-lg overflow-hidden group cursor-pointer"
+                        className="relative aspect-video rounded-lg overflow-hidden group cursor-pointer shadow-lg hover:shadow-xl transition-all"
                         onClick={() => {
                           setActiveVideo(video.src);
                           setCurrentVideoIndex(index);

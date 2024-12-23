@@ -1,4 +1,4 @@
-import { Instagram, Mail, Phone } from "lucide-react";
+import { Instagram, Mail, Phone, Facebook, Music, BrandTiktok } from "lucide-react";
 
 export const Footer = () => {
   return (
@@ -20,19 +20,42 @@ export const Footer = () => {
           </div>
           <div>
             <h3 className="font-display text-xl mb-4">Follow</h3>
-            <a href="https://instagram.com" 
-               className="flex items-center gap-2 hover:text-gray-600"
-               target="_blank"
-               rel="noopener noreferrer">
-              <Instagram className="w-4 h-4" />
-              <span>Instagram</span>
-            </a>
+            <div className="space-y-2">
+              <a href="https://instagram.com" 
+                 className="flex items-center gap-2 hover:text-gray-600"
+                 target="_blank"
+                 rel="noopener noreferrer">
+                <Instagram className="w-4 h-4" />
+                <span>Instagram</span>
+              </a>
+              <a href="https://tiktok.com" 
+                 className="flex items-center gap-2 hover:text-gray-600"
+                 target="_blank"
+                 rel="noopener noreferrer">
+                <BrandTiktok className="w-4 h-4" />
+                <span>TikTok</span>
+              </a>
+              <a href="https://facebook.com" 
+                 className="flex items-center gap-2 hover:text-gray-600"
+                 target="_blank"
+                 rel="noopener noreferrer">
+                <Facebook className="w-4 h-4" />
+                <span>Facebook</span>
+              </a>
+              <a href="https://spotify.com" 
+                 className="flex items-center gap-2 hover:text-gray-600"
+                 target="_blank"
+                 rel="noopener noreferrer">
+                <Music className="w-4 h-4" />
+                <span>Spotify</span>
+              </a>
+            </div>
           </div>
           <div>
             <h3 className="font-display text-xl mb-4">Navigation</h3>
             <div className="space-y-2">
+              <a href="#videos" className="block hover:text-gray-600">Videos</a>
               <a href="#services" className="block hover:text-gray-600">Services</a>
-              <a href="#gallery" className="block hover:text-gray-600">Gallery</a>
               <a href="#contact" className="block hover:text-gray-600">Contact</a>
             </div>
           </div>
