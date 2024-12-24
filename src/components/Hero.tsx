@@ -16,7 +16,7 @@ export const Hero = () => {
 
   useEffect(() => {
     if (videoRef.current) {
-      const videoPath = "/videos/Show real (liv) Compres.mp4";
+      const videoPath = "/videos/show-real-liv.mp4";
       console.log('Hero: Setting video source to:', videoPath);
       
       const handleCanPlay = () => {

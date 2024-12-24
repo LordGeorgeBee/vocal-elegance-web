@@ -12,16 +12,16 @@ import { useToast } from "./ui/use-toast";
 
 const videos = [
   {
-    src: "/videos/Show real (liv) Compres.mp4",
+    src: "/videos/show-real-liv.mp4",
     title: "Performance Highlights",
     thumbnail: "/lovable-uploads/a5ef7a3e-4879-4b90-8769-65514a892886.png"
   },
   {
-    src: "/videos/Show real 2 compres.mp4",
+    src: "/videos/show-real-2.mp4",
     title: "Wedding Performances"
   },
   {
-    src: "/videos/Singing wedding opra.mp4",
+    src: "/videos/singing-wedding-opera.mp4",
     title: "Opera Selections"
   }
 ];
