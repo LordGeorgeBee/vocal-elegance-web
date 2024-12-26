@@ -69,7 +69,7 @@ export const Videos = () => {
   };
 
   return (
-    <section id="videos" className={`py-20 ${
+    <section id="videos" className={`py-12 ${
       isFuneral 
         ? 'bg-funeral-videos' 
         : 'bg-gradient-to-b from-accent to-white'
