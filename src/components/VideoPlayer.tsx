@@ -9,6 +9,7 @@ interface VideoPlayerProps {
   autoPlay?: boolean;
   muted?: boolean;
   loop?: boolean;
+  playsInline?: boolean;
 }
 
 export const VideoPlayer = ({
@@ -18,7 +19,8 @@ export const VideoPlayer = ({
   controls = false,
   autoPlay = false,
   muted = false,
-  loop = false
+  loop = false,
+  playsInline = false
 }: VideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const { toast } = useToast();
@@ -114,7 +116,7 @@ export const VideoPlayer = ({
         autoPlay={autoPlay}
         muted={muted}
         loop={loop}
-        playsInline
+        playsInline={playsInline}
       >
         Your browser does not support the video tag.
       </video>
