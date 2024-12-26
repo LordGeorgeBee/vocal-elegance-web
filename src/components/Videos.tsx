@@ -9,6 +9,7 @@ import { useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { VideoPlayer } from "./VideoPlayer";
 import { useToast } from "./ui/use-toast";
+import { useLocation } from "react-router-dom";
 
 const videos = [
   {
@@ -30,6 +31,8 @@ export const Videos = () => {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const { toast } = useToast();
+  const location = useLocation();
+  const isFuneral = location.pathname === '/funeral';
 
   const handleVideoChange = (direction: 'prev' | 'next') => {
     console.log('Videos: Changing video direction:', direction);
@@ -66,7 +69,11 @@ export const Videos = () => {
   };
 
   return (
-    <section id="videos" className="py-20 bg-gradient-to-b from-accent to-white">
+    <section id="videos" className={`py-20 ${
+      isFuneral 
+        ? 'bg-funeral-background' 
+        : 'bg-gradient-to-b from-accent to-white'
+    }`}>
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-display text-center mb-6">Experience the Magic</h2>
         <p className="text-lg text-center mb-12 max-w-2xl mx-auto">
