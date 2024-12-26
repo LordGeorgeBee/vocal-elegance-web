@@ -29,7 +29,7 @@ export const Hero = () => {
         <div className="absolute inset-0 bg-gray-900" />
       )}
       <VideoPlayer 
-        src="/show-real-liv.mp4"
+        src="/Show real (liv) Compres.mp4"
         autoPlay
         muted
         loop
