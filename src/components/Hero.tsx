@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { ChevronRight } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useToast } from "./ui/use-toast";
+import { VideoPlayer } from "./VideoPlayer";
 
 export const Hero = () => {
-  const videoRef = useRef<HTMLVideoElement>(null);
   const { toast } = useToast();
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
@@ -14,75 +14,29 @@ export const Hero = () => {
     contactSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  useEffect(() => {
-    if (videoRef.current) {
-      const videoPath = "/show-real-liv.mp4"; // Updated path
-      console.log('Hero: Setting video source to:', videoPath);
-      
-      const handleCanPlay = () => {
-        console.log('Hero: Video can play');
-        setIsVideoLoaded(true);
-        videoRef.current?.play().catch(error => {
-          console.error('Hero: Video play error:', error);
-          toast({
-            variant: "destructive",
-            title: "Video Error",
-            description: "There was an error playing the video. Please try refreshing the page.",
-          });
-        });
-      };
-
-      const handleError = (e: Event) => {
-        console.error('Hero: Video error:', e);
-        const video = e.target as HTMLVideoElement;
-        console.error('Hero: Video error details:', {
-          error: video.error,
-          networkState: video.networkState,
-          readyState: video.readyState,
-          currentSrc: video.currentSrc
-        });
-        toast({
-          variant: "destructive",
-          title: "Video Error",
-          description: "There was an error loading the video. Please try refreshing the page.",
-        });
-      };
-
-      videoRef.current.addEventListener('canplay', handleCanPlay);
-      videoRef.current.addEventListener('error', handleError);
-
-      // Set source using source element instead of src attribute
-      const source = document.createElement('source');
-      source.src = videoPath;
-      source.type = 'video/mp4';
-      videoRef.current.innerHTML = ''; // Clear any existing sources
-      videoRef.current.appendChild(source);
-      videoRef.current.load();
-
-      return () => {
-        if (videoRef.current) {
-          videoRef.current.removeEventListener('canplay', handleCanPlay);
-          videoRef.current.removeEventListener('error', handleError);
-        }
-      };
-    }
-  }, [toast]);
+  const handleVideoError = (error: any) => {
+    console.error('Hero: Video error:', error);
+    toast({
+      variant: "destructive",
+      title: "Video Error",
+      description: "There was an error loading the video. Please try refreshing the page.",
+    });
+  };
 
   return (
     <div className="relative h-[80vh] min-h-[500px] md:h-screen md:min-h-[600px] flex items-center justify-center">
       {!isVideoLoaded && (
         <div className="absolute inset-0 bg-gray-900" />
       )}
-      <video 
-        ref={videoRef}
-        autoPlay 
-        muted 
-        loop 
+      <VideoPlayer 
+        src="/show-real-liv.mp4"
+        autoPlay
+        muted
+        loop
         playsInline
+        onError={handleVideoError}
         className="absolute inset-0 w-full h-full object-cover"
-      >
-        Your browser does not support the video tag.
-      </video>
+      />
       <div className="absolute inset-0 bg-black/40" />
       <div className="relative z-10 text-center text-white px-4 max-w-[90%] md:max-w-none">
         <motion.h1 

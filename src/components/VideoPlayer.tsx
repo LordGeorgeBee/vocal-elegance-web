@@ -27,6 +27,12 @@ export const VideoPlayer = ({
   useEffect(() => {
     if (videoRef.current) {
       console.log('VideoPlayer: Loading video from:', src);
+      console.log('VideoPlayer: Current video element state:', {
+        readyState: videoRef.current.readyState,
+        networkState: videoRef.current.networkState,
+        error: videoRef.current.error,
+        currentSrc: videoRef.current.currentSrc
+      });
       
       const handleCanPlay = () => {
         console.log('VideoPlayer: Video can play');
@@ -62,6 +68,16 @@ export const VideoPlayer = ({
         onError?.(e);
       };
 
+      const handleLoadStart = () => {
+        console.log('VideoPlayer: Video load started');
+      };
+
+      const handleLoadedMetadata = () => {
+        console.log('VideoPlayer: Video metadata loaded');
+      };
+
+      videoRef.current.addEventListener('loadstart', handleLoadStart);
+      videoRef.current.addEventListener('loadedmetadata', handleLoadedMetadata);
       videoRef.current.addEventListener('canplay', handleCanPlay);
       videoRef.current.addEventListener('error', handleError);
 
@@ -75,6 +91,8 @@ export const VideoPlayer = ({
 
       return () => {
         if (videoRef.current) {
+          videoRef.current.removeEventListener('loadstart', handleLoadStart);
+          videoRef.current.removeEventListener('loadedmetadata', handleLoadedMetadata);
           videoRef.current.removeEventListener('canplay', handleCanPlay);
           videoRef.current.removeEventListener('error', handleError);
         }
