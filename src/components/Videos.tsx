@@ -75,6 +75,11 @@ export const Videos = () => {
         : 'bg-gradient-to-b from-accent to-white'
     }`}>
       <div className="container mx-auto px-4">
+        <h2 className="text-4xl font-display text-center mb-6">Experience the Magic</h2>
+        <p className="text-lg text-center mb-12 max-w-2xl mx-auto">
+          Watch Olivia perform and imagine how she could make your special day even more memorable.
+        </p>
+
         {activeVideo && (
           <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
             <button 
