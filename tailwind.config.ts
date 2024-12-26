@@ -47,6 +47,7 @@ export default {
           background: "#000000",
           foreground: "#FFFFFF",
           muted: "#0a0a0a",
+          videos: "#BDB8A2"
         }
       },
       fontFamily: {
