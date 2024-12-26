@@ -1,8 +1,12 @@
 import { Music, Heart } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
 export const About = () => {
+  const location = useLocation();
+  const isFuneral = location.pathname === '/funeral';
+
   return (
-    <section className="py-12 md:py-20 px-4 bg-white">
+    <section className={`py-12 md:py-20 px-4 ${isFuneral ? 'bg-black' : 'bg-white'}`}>
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-display mb-6 md:mb-8">About Olivia</h2>
         <div className="space-y-4 md:space-y-6">
