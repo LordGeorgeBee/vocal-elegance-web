@@ -28,13 +28,9 @@ export const VideoPlayer = ({
 
   useEffect(() => {
     if (videoRef.current) {
-      console.log('VideoPlayer: Loading video from:', src);
-      console.log('VideoPlayer: Current video element state:', {
-        readyState: videoRef.current.readyState,
-        networkState: videoRef.current.networkState,
-        error: videoRef.current.error,
-        currentSrc: videoRef.current.currentSrc
-      });
+      // Encode the video URL properly
+      const encodedSrc = src.startsWith('http') ? src : encodeURI(src);
+      console.log('VideoPlayer: Loading video from encoded URL:', encodedSrc);
       
       const handleCanPlay = () => {
         console.log('VideoPlayer: Video can play');
@@ -53,13 +49,13 @@ export const VideoPlayer = ({
       };
 
       const handleError = (e: Event) => {
-        console.error('VideoPlayer: Video error:', e);
         const video = e.target as HTMLVideoElement;
         console.error('VideoPlayer: Video error details:', {
           error: video.error,
           networkState: video.networkState,
           readyState: video.readyState,
-          currentSrc: video.currentSrc
+          currentSrc: video.currentSrc,
+          encodedSrc
         });
         
         toast({
@@ -83,9 +79,9 @@ export const VideoPlayer = ({
       videoRef.current.addEventListener('canplay', handleCanPlay);
       videoRef.current.addEventListener('error', handleError);
 
-      // Set source using source element instead of src attribute
+      // Create source element with encoded URL
       const source = document.createElement('source');
-      source.src = src;
+      source.src = encodedSrc;
       source.type = 'video/mp4';
       videoRef.current.innerHTML = ''; // Clear any existing sources
       videoRef.current.appendChild(source);
