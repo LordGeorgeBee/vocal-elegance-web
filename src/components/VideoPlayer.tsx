@@ -33,13 +33,18 @@ export const VideoPlayer = ({
       
       // Remove leading slash and handle paths
       const cleanSrc = src.startsWith('/') ? src.slice(1) : src;
+      
+      // Properly encode the URL components
+      const encodedSrc = cleanSrc.split('/').map(part => encodeURIComponent(part)).join('/');
+      
       const videoSrc = isPreviewEnvironment 
-        ? `https://preview--vocal-elegance-web.lovable.app/${cleanSrc}`
+        ? `https://preview--vocal-elegance-web.lovable.app/${encodedSrc}`
         : cleanSrc;
       
       console.log('VideoPlayer: Environment:', isPreviewEnvironment ? 'preview' : 'development');
       console.log('VideoPlayer: Original src:', src);
       console.log('VideoPlayer: Clean src:', cleanSrc);
+      console.log('VideoPlayer: Encoded src:', encodedSrc);
       console.log('VideoPlayer: Final video src:', videoSrc);
       
       const handleCanPlay = () => {
@@ -67,7 +72,8 @@ export const VideoPlayer = ({
           currentSrc: video.currentSrc,
           videoSrc,
           isPreviewEnvironment,
-          originalSrc: src
+          originalSrc: src,
+          encodedSrc
         });
         
         toast({
