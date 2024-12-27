@@ -13,16 +13,16 @@ import { useLocation } from "react-router-dom";
 
 const videos = [
   {
-    src: "/Show real (liv) Compres.mp4",
+    src: "/showreel-liv.mp4",
     title: "Performance Highlights",
     thumbnail: "/lovable-uploads/a5ef7a3e-4879-4b90-8769-65514a892886.png"
   },
   {
-    src: "/Show real 2 compres.mp4",
+    src: "/showreel-2.mp4",
     title: "Wedding Performances"
   },
   {
-    src: "/Singing wedding opra.mp4",
+    src: "/singing-wedding-opera.mp4",
     title: "Opera Selections"
   }
 ];
