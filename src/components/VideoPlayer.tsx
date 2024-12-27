@@ -33,10 +33,10 @@ export const VideoPlayer = ({
       // Remove leading slash and clean the source
       const cleanSrc = src.startsWith('/') ? src.slice(1) : src;
       
-      // For preview environment, construct full URL with proper encoding
+      // For preview environment, use the raw URL without additional encoding
       const videoSrc = isPreviewEnvironment 
         ? `${window.location.origin}/${cleanSrc}`
-        : cleanSrc;
+        : src;
       
       console.log('VideoPlayer: Environment:', isPreviewEnvironment ? 'preview' : 'development');
       console.log('VideoPlayer: Original src:', src);
