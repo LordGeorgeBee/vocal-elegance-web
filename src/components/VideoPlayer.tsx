@@ -28,23 +28,19 @@ export const VideoPlayer = ({
 
   useEffect(() => {
     if (videoRef.current) {
-      // Handle video source path
       const isPreviewEnvironment = window.location.hostname.includes('preview--');
       
-      // Remove leading slash and handle paths
+      // Remove leading slash
       const cleanSrc = src.startsWith('/') ? src.slice(1) : src;
       
-      // Properly encode the URL components
-      const encodedSrc = cleanSrc.split('/').map(part => encodeURIComponent(part)).join('/');
-      
+      // For preview environment, construct URL with proper encoding
       const videoSrc = isPreviewEnvironment 
-        ? `https://preview--vocal-elegance-web.lovable.app/${encodedSrc}`
+        ? `https://preview--vocal-elegance-web.lovable.app/${encodeURI(cleanSrc).replace(/\(/g, '%28').replace(/\)/g, '%29').replace(/ /g, '%20')}`
         : cleanSrc;
       
       console.log('VideoPlayer: Environment:', isPreviewEnvironment ? 'preview' : 'development');
       console.log('VideoPlayer: Original src:', src);
       console.log('VideoPlayer: Clean src:', cleanSrc);
-      console.log('VideoPlayer: Encoded src:', encodedSrc);
       console.log('VideoPlayer: Final video src:', videoSrc);
       
       const handleCanPlay = () => {
@@ -72,8 +68,7 @@ export const VideoPlayer = ({
           currentSrc: video.currentSrc,
           videoSrc,
           isPreviewEnvironment,
-          originalSrc: src,
-          encodedSrc
+          originalSrc: src
         });
         
         toast({
