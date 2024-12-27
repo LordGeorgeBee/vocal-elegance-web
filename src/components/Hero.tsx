@@ -24,11 +24,11 @@ export const Hero = () => {
   };
 
   return (
-    <div className="relative h-[80vh] min-h-[500px] md:h-screen md:min-h-[600px] flex items-center justify-center w-full">
+    <div className="relative h-screen w-full flex items-center justify-center overflow-hidden">
       {!isVideoLoaded && (
         <div className="absolute inset-0 bg-gray-900" />
       )}
-      <div className="absolute inset-0 w-full h-full">
+      <div className="absolute inset-0">
         <VideoPlayer 
           src="/showreel-liv.mp4"
           autoPlay
@@ -36,7 +36,7 @@ export const Hero = () => {
           loop
           playsInline
           onError={handleVideoError}
-          className="w-full h-full"
+          className="w-full h-full object-cover"
         />
       </div>
       <div className="absolute inset-0 bg-black/40" />
