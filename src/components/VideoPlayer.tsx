@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { useToast } from "./ui/use-toast";
+import { AspectRatio } from "./ui/aspect-ratio";
 
 interface VideoPlayerProps {
   src: string;
@@ -108,23 +109,25 @@ export const VideoPlayer = ({
   }, [src, autoPlay, onError, toast]);
 
   return (
-    <>
-      {isLoading && (
-        <div className="w-full h-full bg-gray-900 flex items-center justify-center">
-          <span className="text-white">Loading video...</span>
-        </div>
-      )}
-      <video
-        ref={videoRef}
-        className={className}
-        controls={controls}
-        autoPlay={autoPlay}
-        muted={muted}
-        loop={loop}
-        playsInline={playsInline}
-      >
-        Your browser does not support the video tag.
-      </video>
-    </>
+    <div className="w-full">
+      <AspectRatio ratio={16 / 9}>
+        {isLoading && (
+          <div className="w-full h-full bg-gray-900 flex items-center justify-center">
+            <span className="text-white">Loading video...</span>
+          </div>
+        )}
+        <video
+          ref={videoRef}
+          className={`w-full h-full object-contain ${className}`}
+          controls={controls}
+          autoPlay={autoPlay}
+          muted={muted}
+          loop={loop}
+          playsInline={playsInline}
+        >
+          Your browser does not support the video tag.
+        </video>
+      </AspectRatio>
+    </div>
   );
 };
