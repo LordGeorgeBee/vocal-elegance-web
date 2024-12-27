@@ -30,19 +30,30 @@ export const VideoPlayer = ({
     if (videoRef.current) {
       const isPreviewEnvironment = window.location.hostname.includes('preview--');
       
-      // Remove leading slash and clean the source
-      const cleanSrc = src.startsWith('/') ? src.slice(1) : src;
+      // Extract the filename from the path
+      const filename = src.split('/').pop() || '';
+      const basePath = src.substring(0, src.lastIndexOf('/') + 1);
       
-      // For preview environment, use the raw URL without additional encoding
-      const videoSrc = isPreviewEnvironment 
-        ? `${window.location.origin}/${cleanSrc}`
-        : src;
+      // Construct the video source URL
+      let videoSrc = '';
+      if (isPreviewEnvironment) {
+        // Encode only the filename portion
+        const encodedFilename = encodeURIComponent(filename);
+        videoSrc = `${window.location.origin}${basePath}${encodedFilename}`;
+      } else {
+        videoSrc = src;
+      }
       
-      console.log('VideoPlayer: Environment:', isPreviewEnvironment ? 'preview' : 'development');
-      console.log('VideoPlayer: Original src:', src);
-      console.log('VideoPlayer: Clean src:', cleanSrc);
-      console.log('VideoPlayer: Window origin:', window.location.origin);
-      console.log('VideoPlayer: Final video src:', videoSrc);
+      console.log('VideoPlayer: Debug Info:', {
+        environment: isPreviewEnvironment ? 'preview' : 'development',
+        originalSrc: src,
+        filename,
+        basePath,
+        encodedFilename: encodeURIComponent(filename),
+        finalVideoSrc: videoSrc,
+        windowOrigin: window.location.origin,
+        hostname: window.location.hostname
+      });
       
       const handleCanPlay = () => {
         console.log('VideoPlayer: Video can play');
@@ -69,8 +80,7 @@ export const VideoPlayer = ({
           currentSrc: video.currentSrc,
           videoSrc,
           isPreviewEnvironment,
-          originalSrc: src,
-          windowOrigin: window.location.origin
+          originalSrc: src
         });
         
         toast({
@@ -81,16 +91,6 @@ export const VideoPlayer = ({
         onError?.(e);
       };
 
-      const handleLoadStart = () => {
-        console.log('VideoPlayer: Video load started');
-      };
-
-      const handleLoadedMetadata = () => {
-        console.log('VideoPlayer: Video metadata loaded');
-      };
-
-      videoRef.current.addEventListener('loadstart', handleLoadStart);
-      videoRef.current.addEventListener('loadedmetadata', handleLoadedMetadata);
       videoRef.current.addEventListener('canplay', handleCanPlay);
       videoRef.current.addEventListener('error', handleError);
 
@@ -100,8 +100,6 @@ export const VideoPlayer = ({
 
       return () => {
         if (videoRef.current) {
-          videoRef.current.removeEventListener('loadstart', handleLoadStart);
-          videoRef.current.removeEventListener('loadedmetadata', handleLoadedMetadata);
           videoRef.current.removeEventListener('canplay', handleCanPlay);
           videoRef.current.removeEventListener('error', handleError);
         }
