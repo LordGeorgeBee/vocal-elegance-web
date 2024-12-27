@@ -24,21 +24,23 @@ export const Hero = () => {
   };
 
   return (
-    <div className="relative h-[80vh] min-h-[500px] md:h-screen md:min-h-[600px] flex items-center justify-center">
+    <div className="relative h-[80vh] min-h-[500px] md:h-screen md:min-h-[600px] flex items-center justify-center w-full">
       {!isVideoLoaded && (
         <div className="absolute inset-0 bg-gray-900" />
       )}
-      <VideoPlayer 
-        src="/showreel-liv.mp4"
-        autoPlay
-        muted
-        loop
-        playsInline
-        onError={handleVideoError}
-        className="absolute inset-0 w-full h-full object-cover"
-      />
+      <div className="absolute inset-0 w-full h-full">
+        <VideoPlayer 
+          src="/showreel-liv.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          onError={handleVideoError}
+          className="w-full h-full"
+        />
+      </div>
       <div className="absolute inset-0 bg-black/40" />
-      <div className="relative z-10 text-center text-white px-4 max-w-[90%] md:max-w-none">
+      <div className="relative z-10 text-center text-white px-4 w-full max-w-4xl mx-auto">
         <motion.h1 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
