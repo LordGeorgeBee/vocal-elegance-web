@@ -31,9 +31,11 @@ export const VideoPlayer = ({
       // Handle video source path
       const isPreviewEnvironment = window.location.hostname.includes('preview--');
       
-      // Remove leading slash if present and handle preview environment paths
+      // Remove leading slash and handle paths
       const cleanSrc = src.startsWith('/') ? src.slice(1) : src;
-      const videoSrc = cleanSrc;
+      const videoSrc = isPreviewEnvironment 
+        ? `https://preview--vocal-elegance-web.lovable.app/${cleanSrc}`
+        : cleanSrc;
       
       console.log('VideoPlayer: Environment:', isPreviewEnvironment ? 'preview' : 'development');
       console.log('VideoPlayer: Original src:', src);
