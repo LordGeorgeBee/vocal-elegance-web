@@ -30,12 +30,10 @@ export const VideoPlayer = ({
     if (videoRef.current) {
       // Handle video source path
       const isPreviewEnvironment = window.location.hostname.includes('preview--');
-      const cleanSrc = src.startsWith('/') ? src.slice(1) : src;
       
-      // In preview environment, we need to keep the original filename without encoding
-      const videoSrc = isPreviewEnvironment 
-        ? `/${cleanSrc}`
-        : `/${encodeURIComponent(cleanSrc)}`;
+      // Remove leading slash if present and handle preview environment paths
+      const cleanSrc = src.startsWith('/') ? src.slice(1) : src;
+      const videoSrc = cleanSrc;
       
       console.log('VideoPlayer: Environment:', isPreviewEnvironment ? 'preview' : 'development');
       console.log('VideoPlayer: Original src:', src);
