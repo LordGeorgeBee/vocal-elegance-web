@@ -30,17 +30,18 @@ export const VideoPlayer = ({
     if (videoRef.current) {
       const isPreviewEnvironment = window.location.hostname.includes('preview--');
       
-      // Remove leading slash
+      // Remove leading slash and clean the source
       const cleanSrc = src.startsWith('/') ? src.slice(1) : src;
       
-      // For preview environment, construct URL with proper encoding
+      // For preview environment, construct full URL with proper encoding
       const videoSrc = isPreviewEnvironment 
-        ? `https://preview--vocal-elegance-web.lovable.app/${encodeURI(cleanSrc).replace(/\(/g, '%28').replace(/\)/g, '%29').replace(/ /g, '%20')}`
+        ? `${window.location.origin}/${cleanSrc}`
         : cleanSrc;
       
       console.log('VideoPlayer: Environment:', isPreviewEnvironment ? 'preview' : 'development');
       console.log('VideoPlayer: Original src:', src);
       console.log('VideoPlayer: Clean src:', cleanSrc);
+      console.log('VideoPlayer: Window origin:', window.location.origin);
       console.log('VideoPlayer: Final video src:', videoSrc);
       
       const handleCanPlay = () => {
@@ -68,7 +69,8 @@ export const VideoPlayer = ({
           currentSrc: video.currentSrc,
           videoSrc,
           isPreviewEnvironment,
-          originalSrc: src
+          originalSrc: src,
+          windowOrigin: window.location.origin
         });
         
         toast({
