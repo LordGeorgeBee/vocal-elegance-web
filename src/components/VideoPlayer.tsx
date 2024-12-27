@@ -28,9 +28,15 @@ export const VideoPlayer = ({
 
   useEffect(() => {
     if (videoRef.current) {
-      // Encode the video URL properly
-      const encodedSrc = src.startsWith('http') ? src : encodeURI(src);
-      console.log('VideoPlayer: Loading video from encoded URL:', encodedSrc);
+      // Handle video source path
+      const isPreviewEnvironment = window.location.hostname.includes('preview--');
+      const cleanSrc = src.startsWith('/') ? src.slice(1) : src;
+      const encodedSrc = isPreviewEnvironment 
+        ? `/${cleanSrc}` // In preview, keep the path relative but clean
+        : `/${encodeURIComponent(cleanSrc)}`; // In development, encode the path
+      
+      console.log('VideoPlayer: Environment:', isPreviewEnvironment ? 'preview' : 'development');
+      console.log('VideoPlayer: Loading video from path:', encodedSrc);
       
       const handleCanPlay = () => {
         console.log('VideoPlayer: Video can play');
@@ -55,7 +61,8 @@ export const VideoPlayer = ({
           networkState: video.networkState,
           readyState: video.readyState,
           currentSrc: video.currentSrc,
-          encodedSrc
+          encodedSrc,
+          isPreviewEnvironment
         });
         
         toast({
@@ -79,7 +86,7 @@ export const VideoPlayer = ({
       videoRef.current.addEventListener('canplay', handleCanPlay);
       videoRef.current.addEventListener('error', handleError);
 
-      // Create source element with encoded URL
+      // Create source element with proper path
       const source = document.createElement('source');
       source.src = encodedSrc;
       source.type = 'video/mp4';
