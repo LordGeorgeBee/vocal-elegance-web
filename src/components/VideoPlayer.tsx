@@ -31,12 +31,16 @@ export const VideoPlayer = ({
       // Handle video source path
       const isPreviewEnvironment = window.location.hostname.includes('preview--');
       const cleanSrc = src.startsWith('/') ? src.slice(1) : src;
-      const encodedSrc = isPreviewEnvironment 
-        ? `/${cleanSrc}` // In preview, keep the path relative but clean
-        : `/${encodeURIComponent(cleanSrc)}`; // In development, encode the path
+      
+      // In preview environment, we need to keep the original filename without encoding
+      const videoSrc = isPreviewEnvironment 
+        ? `/${cleanSrc}`
+        : `/${encodeURIComponent(cleanSrc)}`;
       
       console.log('VideoPlayer: Environment:', isPreviewEnvironment ? 'preview' : 'development');
-      console.log('VideoPlayer: Loading video from path:', encodedSrc);
+      console.log('VideoPlayer: Original src:', src);
+      console.log('VideoPlayer: Clean src:', cleanSrc);
+      console.log('VideoPlayer: Final video src:', videoSrc);
       
       const handleCanPlay = () => {
         console.log('VideoPlayer: Video can play');
@@ -61,8 +65,9 @@ export const VideoPlayer = ({
           networkState: video.networkState,
           readyState: video.readyState,
           currentSrc: video.currentSrc,
-          encodedSrc,
-          isPreviewEnvironment
+          videoSrc,
+          isPreviewEnvironment,
+          originalSrc: src
         });
         
         toast({
@@ -86,12 +91,8 @@ export const VideoPlayer = ({
       videoRef.current.addEventListener('canplay', handleCanPlay);
       videoRef.current.addEventListener('error', handleError);
 
-      // Create source element with proper path
-      const source = document.createElement('source');
-      source.src = encodedSrc;
-      source.type = 'video/mp4';
-      videoRef.current.innerHTML = ''; // Clear any existing sources
-      videoRef.current.appendChild(source);
+      // Set the source directly on the video element
+      videoRef.current.src = videoSrc;
       videoRef.current.load();
 
       return () => {
