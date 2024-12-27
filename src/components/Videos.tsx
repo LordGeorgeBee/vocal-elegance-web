@@ -19,7 +19,8 @@ const videos = [
   },
   {
     src: "/showreel-2.mp4",
-    title: "Wedding Performances"
+    title: "Wedding Performances",
+    thumbnail: "/lovable-uploads/a32fc31b-23d0-4754-aed3-05c82cbfd604.png"
   },
   {
     src: "/singing-wedding-opera.mp4",
