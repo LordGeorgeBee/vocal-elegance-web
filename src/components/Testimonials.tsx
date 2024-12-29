@@ -23,15 +23,15 @@ export const Testimonials = () => {
   const isFuneral = location.pathname === '/funeral';
 
   return (
-    <section className="py-20 px-4 bg-primary/20">
+    <section className={`py-20 px-4 ${isFuneral ? 'bg-black' : 'bg-primary/20'}`}>
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-4xl font-display text-center mb-16">Testimonials</h2>
+        <h2 className={`text-4xl font-display text-center mb-16 ${isFuneral ? 'text-white' : ''}`}>Testimonials</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
             <div 
               key={index} 
               className={`${
-                isFuneral ? 'bg-black text-white' : 'bg-background'
+                isFuneral ? 'bg-black text-white border border-white/20' : 'bg-background'
               } p-8 rounded-lg shadow-sm`}
             >
               <p className="text-lg italic mb-4">{testimonial.quote}</p>
