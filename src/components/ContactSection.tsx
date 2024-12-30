@@ -20,7 +20,7 @@ export const ContactSection = () => {
           <a href="tel:+1234567890" 
              className="flex items-center justify-center gap-2 md:gap-3 px-6 md:px-8 py-3 md:py-4 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors shadow-md hover:shadow-lg">
             <Phone className="w-4 h-4 md:w-5 md:h-5" />
-            <span className="text-base md:text-lg">Call Me</span>
+            <span className="text-base md:text-lg">Call Us</span>
           </a>
         </div>
 
