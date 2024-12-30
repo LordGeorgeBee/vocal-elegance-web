@@ -1,5 +1,6 @@
-import { Mail, Phone, Instagram, Facebook, Music } from "lucide-react";
+import { Mail, Phone, Instagram, Facebook } from "lucide-react";
 import { TikTokIcon } from "./icons/TikTokIcon";
+import { Spotify } from "lucide-react";
 
 export const ContactSection = () => {
   return (
@@ -44,7 +45,7 @@ export const ContactSection = () => {
                className="flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 bg-accent rounded-lg hover:bg-accent/80 transition-colors text-sm md:text-base"
                target="_blank"
                rel="noopener noreferrer">
-              <Music className="w-4 h-4 md:w-5 md:h-5" />
+              <Spotify className="w-4 h-4 md:w-5 md:h-5" />
               <span>Sample Recordings</span>
             </a>
           </div>
