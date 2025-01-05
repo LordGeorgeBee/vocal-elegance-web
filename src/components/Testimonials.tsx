@@ -31,7 +31,7 @@ export const Testimonials = () => {
             <div 
               key={index} 
               className={`${
-                isFuneral ? 'bg-black text-white border border-white/20' : 'bg-background'
+                isFuneral ? 'bg-funeral-primary text-white border border-white/20' : 'bg-background'
               } p-8 rounded-lg shadow-sm`}
             >
               <p className="text-lg italic mb-4">{testimonial.quote}</p>
