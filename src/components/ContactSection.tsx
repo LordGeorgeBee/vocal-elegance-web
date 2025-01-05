@@ -32,7 +32,7 @@ export const ContactSection = () => {
                target="_blank"
                rel="noopener noreferrer">
               <Instagram className="w-4 h-4 md:w-5 md:h-5" />
-              <span>Portfolio</span>
+              <span>intagram</span>
             </a>
             <a href="https://facebook.com" 
                className="flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 bg-accent rounded-lg hover:bg-accent/80 transition-colors text-sm md:text-base"
