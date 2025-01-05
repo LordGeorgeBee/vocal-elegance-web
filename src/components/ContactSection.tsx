@@ -6,7 +6,7 @@ export const ContactSection = () => {
   return (
     <section id="contact" className="py-12 md:py-20 px-4 bg-gradient-to-b from-secondary/20 to-background">
       <div className="max-w-4xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-display mb-3 md:mb-4">Contact Me</h2>
+        <h2 className="text-3xl md:text-4xl font-display mb-3 md:mb-4">Contact Us</h2>
         <p className="text-base md:text-lg mb-8 md:mb-12 max-w-2xl mx-auto">
           I understand that arranging memorial services requires sensitivity and care. I'm here to help you create a meaningful musical tribute for your loved one.
         </p>
