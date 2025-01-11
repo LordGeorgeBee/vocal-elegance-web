@@ -25,7 +25,7 @@ export const Testimonials = () => {
   return (
     <section className={`py-20 px-4 ${isFuneral ? 'bg-black' : 'bg-primary/20'}`}>
       <div className="max-w-4xl mx-auto">
-        <h2 className={`text-4xl font-display text-center mb-16 ${isFuneral ? 'text-white' : ''}`}>cheese</h2>
+        <h2 className={`text-4xl font-display text-center mb-16 ${isFuneral ? 'text-white' : ''}`}>hello</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
             <div 
